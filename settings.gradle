@@ -1,2 +1,5 @@
 rootProject.name = 'Azzinoth'
 include 'azzinoth-barrier'
+include 'azzinoth-plugin-es'
+include 'azzinoth-common'
+
