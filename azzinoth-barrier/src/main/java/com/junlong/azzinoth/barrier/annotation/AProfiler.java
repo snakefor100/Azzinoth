@@ -44,7 +44,7 @@ public @interface AProfiler {
      * 监控功能注册 默认： 方法TP监控：开启 JVM监控：开启 方法错误率监控：开启 心跳检测:开启
      * @return
      */
-    ACustomFunctionEnum[] function() default {ACustomFunctionEnum.TP,ACustomFunctionEnum.JVM,ACustomFunctionEnum.FUNCTIONERROR,ACustomFunctionEnum.HEARTBEAT};
+    ACustomFunctionEnum[] function() default {ACustomFunctionEnum.TP,ACustomFunctionEnum.FUNCTIONERROR,ACustomFunctionEnum.HEARTBEAT};
     /**
      *
      * @return

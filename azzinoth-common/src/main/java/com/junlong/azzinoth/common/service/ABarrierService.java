@@ -22,14 +22,14 @@ public interface ABarrierService {
      * @param methodName
      * @return
      */
-    public MethodEntity registerMethodStart(String appName, String methodName);
+    public MethodEntity registerMethodStart(String appName, String methodName,MethodEntity methodEntity);
 
     /**
      * 方法结束
      * @param methodEntity
      * @return
      */
-    public MethodEntity registerMethodEnd(MethodEntity methodEntity);
+    public MethodEntity registerMethodEnd(String appName, String methodName,String id,MethodEntity methodEntity);
 
     /**
      * 方法异常注册
@@ -37,5 +37,5 @@ public interface ABarrierService {
      * @param throwable
      * @return
      */
-    public MethodEntity registerMethodError(MethodEntity methodEntity, Throwable throwable);
+    public MethodEntity registerMethodError(String appName, String methodName,MethodEntity methodEntity, Throwable throwable);
 }

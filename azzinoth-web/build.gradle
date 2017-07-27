@@ -1,0 +1,16 @@
+apply plugin: 'war'
+dependencies {
+
+    compile group: 'org.springframework', name: 'spring-context', version: '4.3.9.RELEASE'
+    compile group: 'org.springframework', name: 'spring-core', version: '4.3.9.RELEASE'
+    compile group: 'org.springframework', name: 'spring-webmvc', version: '4.3.9.RELEASE'
+    compile group: 'org.springframework', name: 'spring-orm', version: '4.3.9.RELEASE'
+    compile group: 'org.springframework', name: 'spring-jdbc', version: '4.3.9.RELEASE'
+    compile group: 'org.springframework', name: 'spring-tx', version: '4.3.9.RELEASE'
+    compile group: 'org.springframework', name: 'spring-context-support', version: '4.3.9.RELEASE'
+    compile group: 'org.springframework', name: 'spring-expression', version: '4.3.9.RELEASE'
+    compile group: 'org.springframework', name: 'spring-aspects', version: '4.3.9.RELEASE'
+    compile group: 'aopalliance', name: 'aopalliance', version: '1.0'
+    compile group: 'cglib', name: 'cglib', version: '3.2.5'
+    compile project(':azzinoth-common')
+}

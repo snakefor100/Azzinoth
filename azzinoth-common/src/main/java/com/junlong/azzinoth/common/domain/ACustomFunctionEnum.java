@@ -13,10 +13,7 @@ public enum  ACustomFunctionEnum {
      * 错误率统计
      */
     FUNCTIONERROR,
-    /**
-     * jvm性能监控
-     */
-    JVM,
+
     /**
      * 方法TPS统计
      */

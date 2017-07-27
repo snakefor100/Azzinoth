@@ -1,0 +1,5 @@
+
+dependencies {
+    compile group: 'org.elasticsearch.client', name: 'transport', version: '5.2.2'
+    compile project(':azzinoth-common')
+}

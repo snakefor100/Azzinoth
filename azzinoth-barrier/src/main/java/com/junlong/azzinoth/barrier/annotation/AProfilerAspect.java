@@ -5,7 +5,7 @@ import com.junlong.azzinoth.barrier.exception.MethodTimeOutException;
 import com.junlong.azzinoth.common.domain.AProEnum;
 import com.junlong.azzinoth.common.domain.ErrorConstants;
 import com.junlong.azzinoth.common.domain.MethodEntity;
-import com.junlong.azzinoth.common.service.ABarrierService;
+import com.junlong.azzinoth.common.service.AzzinothProfiler;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -16,7 +16,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.lang.reflect.Method;
 
 import static com.junlong.azzinoth.common.domain.ErrorConstants.APROENUM_LOG;
@@ -29,8 +28,7 @@ import static com.junlong.azzinoth.common.domain.ErrorConstants.APROENUM_LOG;
 @Component
 public class AProfilerAspect implements InitializingBean {
     private final static Logger LOG = LoggerFactory.getLogger(AProfilerAspect.class);
-    @Resource
-    private ABarrierService aBarrierService;
+
     private static final ObjectMapper OBJECT_MAPPER =  new ObjectMapper();
 
     @Pointcut("@annotation(com.junlong.azzinoth.barrier.annotation.AProfiler)")
@@ -47,14 +45,16 @@ public class AProfilerAspect implements InitializingBean {
         long startTime = System.currentTimeMillis();
         Object result = null;
         MethodEntity methodEntity = null;
+        long endTime = 0L;
         Object[] param = null;
+        AProfiler aProfiler = null;
         try {
             Method method = getMethod(joinPoint);
             param = joinPoint.getArgs();
-            AProfiler aProfiler = method.getAnnotation(AProfiler.class);
-            methodEntity = aBarrierService.registerMethodStart(aProfiler.appName(), aProfiler.methodName());
+            aProfiler = method.getAnnotation(AProfiler.class);
+            methodEntity = AzzinothProfiler.registerMethodStart(aProfiler.appName(), aProfiler.methodName(),startTime);
             result = joinPoint.proceed();
-            long endTime = System.currentTimeMillis();
+            endTime = System.currentTimeMillis();
             long consumeTime = startTime - endTime;
 
             for(AProEnum proEnum : aProfiler.mstate()){
@@ -68,10 +68,11 @@ public class AProfilerAspect implements InitializingBean {
                 }
             }
         }catch (Throwable e){
-            aBarrierService.registerMethodError(methodEntity,e);
+            AzzinothProfiler.registerMethodError(aProfiler.appName(),aProfiler.methodName(),methodEntity,e);
             throw e;
         }finally {
-            aBarrierService.registerMethodEnd(methodEntity);
+            endTime = System.currentTimeMillis();
+            AzzinothProfiler.registerMethodEnd(aProfiler.appName(),aProfiler.methodName(),methodEntity,endTime);
         }
         return result;
     }
