@@ -1,4 +1,4 @@
-package com.junlong.azzinoth.common.domain;
+package com.junlong.azzinoth.common.constants;
 
 /**
  * 错误信息常量

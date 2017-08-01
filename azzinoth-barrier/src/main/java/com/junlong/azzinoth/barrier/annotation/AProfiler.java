@@ -1,8 +1,8 @@
 package com.junlong.azzinoth.barrier.annotation;
 
 
-import com.junlong.azzinoth.common.domain.ACustomFunctionEnum;
-import com.junlong.azzinoth.common.domain.AProEnum;
+import com.junlong.azzinoth.common.enums.ACustomFunctionEnum;
+import com.junlong.azzinoth.common.enums.AProEnum;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -41,7 +41,7 @@ public @interface AProfiler {
     AProEnum[] mstate() default {AProEnum.LOG};
 
     /**
-     * 监控功能注册 默认： 方法TP监控：开启 JVM监控：开启 方法错误率监控：开启 心跳检测:开启
+     * 监控功能注册 默认： 方法TP监控：开启  方法错误率监控：开启 心跳检测:开启
      * @return
      */
     ACustomFunctionEnum[] function() default {ACustomFunctionEnum.TP,ACustomFunctionEnum.FUNCTIONERROR,ACustomFunctionEnum.HEARTBEAT};

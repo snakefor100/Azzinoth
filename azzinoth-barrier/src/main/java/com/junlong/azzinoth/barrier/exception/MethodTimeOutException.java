@@ -1,6 +1,6 @@
 package com.junlong.azzinoth.barrier.exception;
 
-import com.junlong.azzinoth.common.domain.ErrorConstants.Error;
+import com.junlong.azzinoth.common.constants.ErrorConstants.Error;
 
 /**
  * AProfiler配置超时监控后的方法超时异常

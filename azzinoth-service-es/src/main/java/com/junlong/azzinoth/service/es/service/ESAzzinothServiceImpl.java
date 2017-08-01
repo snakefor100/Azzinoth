@@ -1,20 +1,21 @@
 package com.junlong.azzinoth.service.es.service;
 
-import com.junlong.azzinoth.common.domain.ACustomFunctionEnum;
 import com.junlong.azzinoth.common.domain.MethodEntity;
-import com.junlong.azzinoth.common.service.ABarrierService;
-import com.junlong.azzinoth.service.es.constants.EsConstants;
+import com.junlong.azzinoth.common.enums.ACustomFunctionEnum;
+import com.junlong.azzinoth.common.service.AzzinothService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 /**
  * Created by niujunlong on 2017/7/24.
  */
 @Service
-public class ESBarrierService implements ABarrierService {
-    private final static Logger LOG = LoggerFactory.getLogger(ESBarrierService.class);
-
+public class ESAzzinothServiceImpl implements AzzinothService {
+    private final static Logger LOG = LoggerFactory.getLogger(ESAzzinothServiceImpl.class);
+    @Resource
     private ESClient esClient;
 
     @Override
@@ -36,9 +37,8 @@ public class ESBarrierService implements ABarrierService {
     }
 
     @Override
-    public MethodEntity registerMethodError(String appName, String methodName, MethodEntity methodEntity, Throwable throwable) {
-        appName = appName + EsConstants.INDEX_ERROR_SUFFIX;
-        esClient.saveMethodIndex(appName, methodName, methodEntity);
+    public MethodEntity registerMethodError(String appName, String methodName,String id, MethodEntity methodEntity, Throwable throwable) {
+        esClient.updateMethodIndex(appName,methodName,id,methodEntity);
         return methodEntity;
     }
 }

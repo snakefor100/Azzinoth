@@ -1,7 +1,7 @@
 package com.junlong.azzinoth.service.es.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.junlong.azzinoth.common.domain.CommonConstants;
+import com.junlong.azzinoth.common.constants.CommonConstants;
 import com.junlong.azzinoth.common.domain.MethodEntity;
 import com.junlong.azzinoth.service.es.constants.EsConstants;
 import com.junlong.azzinoth.service.es.domain.ESServiceConfig;
@@ -30,7 +30,7 @@ import java.util.Map;
  */
 @Service
 public class ESClient {
-    private final static Logger LOG = LoggerFactory.getLogger(ESBarrierService.class);
+    private final static Logger LOG = LoggerFactory.getLogger(ESAzzinothServiceImpl.class);
     private static final ObjectMapper OBJECT_MAPPER =  new ObjectMapper();
     private TransportClient client;
 
@@ -62,6 +62,9 @@ public class ESClient {
         }
     }
 
+    public void query(String indexName,String type,Long start,Long end){
+//        client.prepareSearch(indexName).setTypes(type).
+    }
 /**********************************      初始化/关闭     ************************************************************************/
     /**
      * 初始化ES客戶端

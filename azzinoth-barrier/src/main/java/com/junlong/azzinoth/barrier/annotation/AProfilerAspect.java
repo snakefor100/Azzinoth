@@ -2,10 +2,10 @@ package com.junlong.azzinoth.barrier.annotation;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.junlong.azzinoth.barrier.exception.MethodTimeOutException;
-import com.junlong.azzinoth.common.domain.AProEnum;
-import com.junlong.azzinoth.common.domain.ErrorConstants;
+import com.junlong.azzinoth.barrier.service.AzzinothProfiler;
+import com.junlong.azzinoth.common.constants.ErrorConstants;
 import com.junlong.azzinoth.common.domain.MethodEntity;
-import com.junlong.azzinoth.common.service.AzzinothProfiler;
+import com.junlong.azzinoth.common.enums.AProEnum;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
 
-import static com.junlong.azzinoth.common.domain.ErrorConstants.APROENUM_LOG;
+import static com.junlong.azzinoth.common.constants.ErrorConstants.APROENUM_LOG;
 
 /**
  * AProfiler注解服务类

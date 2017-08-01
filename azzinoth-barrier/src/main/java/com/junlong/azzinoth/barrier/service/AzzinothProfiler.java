@@ -1,8 +1,9 @@
-package com.junlong.azzinoth.common.service;
+package com.junlong.azzinoth.barrier.service;
 
-import com.junlong.azzinoth.common.domain.ACustomFunctionEnum;
-import com.junlong.azzinoth.common.domain.CommonConstants;
+import com.junlong.azzinoth.common.constants.CommonConstants;
 import com.junlong.azzinoth.common.domain.MethodEntity;
+import com.junlong.azzinoth.common.enums.ACustomFunctionEnum;
+import com.junlong.azzinoth.common.service.AzzinothService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,8 +15,8 @@ import java.util.UUID;
  */
 public class AzzinothProfiler {
     private final static Logger LOG = LoggerFactory.getLogger(AzzinothProfiler.class);
-    private static ABarrierService service;
-    public AzzinothProfiler(ABarrierService service){
+    private static AzzinothService service;
+    public AzzinothProfiler(AzzinothService service){
         this.service = service;
     }
 
@@ -75,8 +76,7 @@ public class AzzinothProfiler {
         try {
             methodEntity.setErrorCode(CommonConstants.ERROR_CODE_FAIL);
             methodEntity.setErrorMsg(throwable.getMessage());
-            methodEntity.setConsumeTime(methodEntity.getEndTime() - methodEntity.getStartTime());
-            service.registerMethodError(appName,methodName,methodEntity,throwable);
+            service.registerMethodError(appName,methodName,methodEntity.getId(),methodEntity,throwable);
         }catch (Exception e){
             LOG.error("",e);
         }

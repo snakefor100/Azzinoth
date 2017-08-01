@@ -1,4 +1,4 @@
-package com.junlong.azzinoth.common.domain;
+package com.junlong.azzinoth.common.enums;
 
 /**
  * 方法监控功能

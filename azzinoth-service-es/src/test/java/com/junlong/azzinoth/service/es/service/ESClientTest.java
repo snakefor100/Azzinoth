@@ -1,6 +1,6 @@
 package com.junlong.azzinoth.service.es.service;
 
-import com.junlong.azzinoth.common.domain.CommonConstants;
+import com.junlong.azzinoth.common.constants.CommonConstants;
 import com.junlong.azzinoth.common.domain.MethodEntity;
 import com.junlong.azzinoth.service.es.domain.ESServiceConfig;
 import org.junit.Before;
@@ -42,4 +42,16 @@ public class ESClientTest {
         methodEntity.setErrorCode(CommonConstants.ERROR_CODE_SUCCESS);
         es.saveMethodIndex("azzinoth","test",methodEntity);
     }
+
+    @Test
+    public void updateIndex() {
+        MethodEntity methodEntity = new MethodEntity();
+        methodEntity.setId("345fa022-9eb7-4b04-a4a2-eca856d7be43");
+        methodEntity.setStartTime(System.currentTimeMillis());
+        methodEntity.setErrorCode(CommonConstants.ERROR_CODE_SUCCESS);
+        methodEntity.setEndTime(System.currentTimeMillis());
+        methodEntity.setConsumeTime(System.currentTimeMillis()-methodEntity.getStartTime());
+        es.saveMethodIndex("azzinoth","test",methodEntity);
+    }
+
 }
