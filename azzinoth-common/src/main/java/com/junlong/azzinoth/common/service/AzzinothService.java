@@ -22,14 +22,14 @@ public interface AzzinothService {
      * @param methodName
      * @return
      */
-    public MethodEntity registerMethodStart(String appName, String methodName, MethodEntity methodEntity);
+    public MethodEntity registerMethodStart(String appName, String methodName,Long time);
 
     /**
      * 方法结束
      * @param methodEntity
      * @return
      */
-    public MethodEntity registerMethodEnd(String appName, String methodName, String id, MethodEntity methodEntity);
+    public MethodEntity registerMethodEnd(String appName, String methodName,MethodEntity methodEntity,Long time);
 
     /**
      * 方法异常注册
@@ -37,5 +37,5 @@ public interface AzzinothService {
      * @param throwable
      * @return
      */
-    public MethodEntity registerMethodError(String appName, String methodName, String id, MethodEntity methodEntity, Throwable throwable);
+    public MethodEntity registerMethodError(String appName, String methodName, MethodEntity methodEntity, Throwable throwable);
 }

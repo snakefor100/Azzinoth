@@ -1,18 +1,29 @@
 package com.junlong.azzinoth.common.domain;
 
+import java.util.List;
+
 /**
  * 方法监控结果（某个时间段内，方法的TP值，错误率等）
  * Created by niujunlong on 2017/8/2.
  */
-public class MethodResultEntity {
+public class MethodResultEntity<T> {
     private Long TP99;
     private Long TP90;
     private Long TP80;
     private Long TP70;
     private Long TP60;
     private Long TP50;
-    private Double errorRate;
+    private Double successRate;
     private Long requestCount;
+    private List<T> errDetail;
+
+    public List<T> getErrDetail() {
+        return errDetail;
+    }
+
+    public void setErrDetail(List<T> errDetail) {
+        this.errDetail = errDetail;
+    }
 
     public Long getTP99() {
         return TP99;
@@ -62,12 +73,12 @@ public class MethodResultEntity {
         this.TP50 = TP50;
     }
 
-    public Double getErrorRate() {
-        return errorRate;
+    public Double getSuccessRate() {
+        return successRate;
     }
 
-    public void setErrorRate(Double errorRate) {
-        this.errorRate = errorRate;
+    public void setSuccessRate(Double successRate) {
+        this.successRate = successRate;
     }
 
     public Long getRequestCount() {

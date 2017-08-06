@@ -9,9 +9,11 @@ import com.junlong.azzinoth.common.domain.MethodResultEntity;
 public interface AzzinothQueryService {
     /**
      * 查询时间段内方法的监控结果
+     * @param appName
+     * @param methodName
      * @param startTime
      * @param endTime
      * @return
      */
-    MethodResultEntity queryMethodResultInTime(String startTime, String endTime);
+    MethodResultEntity queryMethodResultInTime(String appName, String methodName, String startTime, String endTime);
 }

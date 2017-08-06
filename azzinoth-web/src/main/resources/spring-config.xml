@@ -12,8 +12,32 @@
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
         <context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice" />
     </context:component-scan>
+    <context:property-placeholder location="classpath:esconfig.properties" ignore-unresolvable="true"/>
+    <!--<bean id="prop" class="org.springframework.beans.factory.config.PropertiesFactoryBean">-->
+        <!--&lt;!&ndash; 这里是PropertiesFactoryBean类，它也有个locations属性，也是接收一个数组，跟上面一样 &ndash;&gt;-->
+        <!--<property name="locations">-->
+            <!--<array>-->
+                <!--<value>classpath:esconfig.properties</value>-->
+            <!--</array>-->
+        <!--</property>-->
+    <!--</bean>-->
+
     <!-- 配置使Spring采用CGLIB代理 -->
     <aop:aspectj-autoproxy proxy-target-class="true"/>
     <context:property-placeholder location="classpath*:esconfig.properties"/>
 
+    <bean id="azzinothQueryService" class="com.junlong.azzinoth.service.es.service.ESAzzinothQueryServiceImpl">
+    </bean>
+
+    <bean id="azzinothService" class="com.junlong.azzinoth.service.es.service.ESAzzinothServiceImpl">
+    </bean>
+
+    <bean id="ESClient" class="com.junlong.azzinoth.service.es.service.ESClient">
+        <constructor-arg index="0" ref="esServiceConfig"></constructor-arg>
+    </bean>
+    <bean id="esServiceConfig" class="com.junlong.azzinoth.service.es.domain.ESServiceConfig">
+        <property name="transportSniff" value="${es.client.transport.sniff}"></property>
+        <property name="serverList" value="${es.serverlist}"></property>
+        <property name="clusterName" value="${es.cluster.name}"></property>
+    </bean>
 </beans>

@@ -8,7 +8,7 @@
 	http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
 	http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context-4.0.xsd">
-
+    <mvc:default-servlet-handler/>
     <!-- springMVC注解扫描 -->
     <mvc:annotation-driven>
         <mvc:message-converters register-defaults="true">
@@ -17,7 +17,7 @@
             </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
-    <context:component-scan base-package="com.junlong" use-default-filters="false">
+    <context:component-scan base-package="com.junlong.azzinoth.web.controller" use-default-filters="false">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
         <context:include-filter type="annotation"
                                 expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
@@ -41,7 +41,7 @@
             </list>
         </property>
     </bean>
-    <!--&lt;!&ndash; 启动SpringMVC的注解功能，完成请求和注解POJO的映射 &ndash;&gt;-->
+    <!-- 启动SpringMVC的注解功能，完成请求和注解POJO的映射 -->
     <!--<bean-->
     <!--class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">-->
     <!--<property name="messageConverters">-->

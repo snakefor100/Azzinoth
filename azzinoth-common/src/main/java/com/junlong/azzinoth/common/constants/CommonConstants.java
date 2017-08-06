@@ -9,6 +9,10 @@ public class CommonConstants {
      */
     public static final String SYMBOL_COLON = ":";
     /**
+     * 分隔符-冒号
+     */
+    public static final String SYMBOL_COMMA = ",";
+    /**
      * 默认字符串空值
      */
     public static final String DEFAULT_STRING_NULL_VALUE="";

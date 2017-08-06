@@ -2,10 +2,10 @@ package com.junlong.azzinoth.barrier.annotation;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.junlong.azzinoth.barrier.exception.MethodTimeOutException;
-import com.junlong.azzinoth.barrier.service.AzzinothProfiler;
 import com.junlong.azzinoth.common.constants.ErrorConstants;
 import com.junlong.azzinoth.common.domain.MethodEntity;
 import com.junlong.azzinoth.common.enums.AProEnum;
+import com.junlong.azzinoth.common.service.AzzinothService;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.lang.reflect.Method;
 
 import static com.junlong.azzinoth.common.constants.ErrorConstants.APROENUM_LOG;
@@ -28,12 +29,14 @@ import static com.junlong.azzinoth.common.constants.ErrorConstants.APROENUM_LOG;
 @Component
 public class AProfilerAspect implements InitializingBean {
     private final static Logger LOG = LoggerFactory.getLogger(AProfilerAspect.class);
-
+    @Resource(name = "azzinothService")
+    private AzzinothService service;
     private static final ObjectMapper OBJECT_MAPPER =  new ObjectMapper();
 
     @Pointcut("@annotation(com.junlong.azzinoth.barrier.annotation.AProfiler)")
     public void AProfilerPoint() {
     }
+
 
     /**
      * AProfiler注解方法切面
@@ -52,7 +55,7 @@ public class AProfilerAspect implements InitializingBean {
             Method method = getMethod(joinPoint);
             param = joinPoint.getArgs();
             aProfiler = method.getAnnotation(AProfiler.class);
-            methodEntity = AzzinothProfiler.registerMethodStart(aProfiler.appName(), aProfiler.methodName(),startTime);
+            methodEntity = service.registerMethodStart(aProfiler.appName(), aProfiler.methodName(),startTime);
             result = joinPoint.proceed();
             endTime = System.currentTimeMillis();
             long consumeTime = startTime - endTime;
@@ -68,11 +71,11 @@ public class AProfilerAspect implements InitializingBean {
                 }
             }
         }catch (Throwable e){
-            AzzinothProfiler.registerMethodError(aProfiler.appName(),aProfiler.methodName(),methodEntity,e);
+            service.registerMethodError(aProfiler.appName(),aProfiler.methodName(),methodEntity,e);
             throw e;
         }finally {
             endTime = System.currentTimeMillis();
-            AzzinothProfiler.registerMethodEnd(aProfiler.appName(),aProfiler.methodName(),methodEntity,endTime);
+            service.registerMethodEnd(aProfiler.appName(),aProfiler.methodName(),methodEntity,endTime);
         }
         return result;
     }

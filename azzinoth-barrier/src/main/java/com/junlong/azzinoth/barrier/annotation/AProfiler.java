@@ -4,10 +4,7 @@ package com.junlong.azzinoth.barrier.annotation;
 import com.junlong.azzinoth.common.enums.ACustomFunctionEnum;
 import com.junlong.azzinoth.common.enums.AProEnum;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
 /**
  * 自定义监控注解

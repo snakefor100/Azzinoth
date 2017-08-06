@@ -1,5 +1,7 @@
 package com.junlong.azzinoth.service.es.constants;
 
+import org.springframework.beans.factory.annotation.Value;
+
 /**
  * 静态常量
  * Created by niujunlong on 2017/7/26.
@@ -14,5 +16,8 @@ public class EsConstants {
     public static final String DOC_FIELD_START_TIME="startTime";
     public static final String DOC_FIELD_END_TIME="endTime";
 
+    /*******************************************  elastic search 配置字段 *******************************************************************/
+    public static final String ES_CONFIG_CLUSTER_NAME = "cluster.name";
+    public static final String ES_CONFIG_SNIFF = "client.transport.sniff";
 
 }

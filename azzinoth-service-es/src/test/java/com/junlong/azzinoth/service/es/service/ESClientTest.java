@@ -16,22 +16,17 @@ import java.util.UUID;
  */
 public class ESClientTest {
     public static ESClient es;
-    public static final String ES_CONFIG_CLUSTER_NAME = "cluster.name";
-    public static final String ES_CONFIG_SNIFF = "client.transport.sniff";
+
+
     @Before
     public void init() {
         ESServiceConfig config = new ESServiceConfig();
-        config.setServerList(new ArrayList<String>() {
-            {
-                add("localhost:9300");
-            }
-        });
-        Map<String, String> map = new HashMap<String, String>();
-        map.put(ES_CONFIG_CLUSTER_NAME, "myindex");
-        map.put(ES_CONFIG_SNIFF, "true");
-        config.setSetting(map);
-        es = new ESClient();
-        es.init(config);
+        config.setServerList("localhost:9300");
+        config.setClusterName("myindex");
+        config.setTransportSniff(true);
+
+        es = new ESClient(config);
+
     }
 
     @Test
@@ -40,18 +35,26 @@ public class ESClientTest {
         methodEntity.setId(UUID.randomUUID().toString());
         methodEntity.setStartTime(System.currentTimeMillis());
         methodEntity.setErrorCode(CommonConstants.ERROR_CODE_SUCCESS);
-        es.saveMethodIndex("azzinoth","test",methodEntity);
+        es.saveMethodIndex("azzinoth", "test", methodEntity);
     }
 
     @Test
     public void updateIndex() {
         MethodEntity methodEntity = new MethodEntity();
-        methodEntity.setId("345fa022-9eb7-4b04-a4a2-eca856d7be43");
-        methodEntity.setStartTime(System.currentTimeMillis());
-        methodEntity.setErrorCode(CommonConstants.ERROR_CODE_SUCCESS);
-        methodEntity.setEndTime(System.currentTimeMillis());
-        methodEntity.setConsumeTime(System.currentTimeMillis()-methodEntity.getStartTime());
-        es.saveMethodIndex("azzinoth","test",methodEntity);
+        methodEntity.setId("7c537e9a-fa42-4760-ac0d-e6415b3505d4");
+        methodEntity.setStartTime(1501174498345L);
+        methodEntity.setErrorCode(CommonConstants.ERROR_CODE_FAIL);
+        methodEntity.setEndTime(1502168685699L);
+        methodEntity.setConsumeTime(1502168685699L - 1501174498345L);
+        es.updateMethodIndex("azzinoth", "test", "73617733-3bd4-4d2c-994c-1f9c353ac376", methodEntity);
+    }
+
+    @Test
+    public void searchIndex() {
+//        es.queryErrorMethodDetail("azzinoth","test",1500168685669L,1511168685669L);
+        int n = 10;
+        int floor = (int) (10 * 0.99);
+        System.out.println(floor);
     }
 
 }
