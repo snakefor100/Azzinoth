@@ -16,4 +16,5 @@ public interface AzzinothQueryService {
      * @return
      */
     MethodResultEntity queryMethodResultInTime(String appName, String methodName, String startTime, String endTime);
+    MethodResultEntity queryMethodResultInTime(String appName, String methodName, Long startTime, Long endTime);
 }

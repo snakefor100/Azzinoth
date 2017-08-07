@@ -27,8 +27,15 @@ public class AzzinothController {
     @Resource
     public TestService testService;
 
-    @RequestMapping("/queryMethodPerformance")
+    @RequestMapping("/queryMethodPerformanceForTimeString")
+    @ResponseBody
     public MethodResultEntity<SearchHit> monitorMethod(String appName,String method,String startTime,String endTime){
+        return azzinothQueryService.queryMethodResultInTime(appName,method,startTime,endTime);
+    }
+
+    @RequestMapping("/queryMethodPerformanceForTimeLong")
+    @ResponseBody
+    public MethodResultEntity<SearchHit> monitorMethod(String appName,String method,Long startTime,Long endTime){
         return azzinothQueryService.queryMethodResultInTime(appName,method,startTime,endTime);
     }
 

@@ -27,10 +27,15 @@ public class ESAzzinothQueryServiceImpl implements AzzinothQueryService {
     public MethodResultEntity<SearchHit> queryMethodResultInTime(String appName, String methodName,String startTime, String endTime) {
         long start = DateTime.parse(startTime, DateTimeFormat.forPattern(CommonConstants.DEFAULT_TIME_FORMAT)).toDate().getTime();
         long end = DateTime.parse(endTime, DateTimeFormat.forPattern(CommonConstants.DEFAULT_TIME_FORMAT)).toDate().getTime();
+        return queryMethodResultInTime(appName,methodName,start,end);
+    }
+
+    @Override
+    public MethodResultEntity queryMethodResultInTime(String appName, String methodName, Long startTime, Long endTime) {
         MethodResultEntity resultEntity = new MethodResultEntity();
-        SearchResponse totalSearchResponse = esClient.queryMethodDetail(appName, methodName, start, end);
+        SearchResponse totalSearchResponse = esClient.queryMethodDetail(appName, methodName, startTime, endTime);
         SearchHit[] totalHitArr = totalSearchResponse.getHits().getHits();
-        SearchResponse errorSearchResponse = esClient.queryErrorMethodDetail(appName, methodName, start, end);
+        SearchResponse errorSearchResponse = esClient.queryErrorMethodDetail(appName, methodName, startTime, endTime);
         //请求总数
         long totalHits = totalSearchResponse.getHits().getTotalHits();
         long errorHits = errorSearchResponse.getHits().getTotalHits();
