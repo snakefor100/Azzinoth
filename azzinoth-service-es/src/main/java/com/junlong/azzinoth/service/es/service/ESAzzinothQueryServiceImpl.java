@@ -41,12 +41,12 @@ public class ESAzzinothQueryServiceImpl implements AzzinothQueryService {
         long errorHits = errorSearchResponse.getHits().getTotalHits();
 
         resultEntity.setRequestCount(totalHits);
-        resultEntity.setTP99((Long) totalHitArr[(int) (0.99 * totalHits)].getSource().get(EsConstants.DOC_FIELD_CONSUME_TIME));
-        resultEntity.setTP90((Long) totalHitArr[(int) (0.9 * totalHits)].getSource().get(EsConstants.DOC_FIELD_CONSUME_TIME));
-        resultEntity.setTP80((Long) totalHitArr[(int) (0.8 * totalHits)].getSource().get(EsConstants.DOC_FIELD_CONSUME_TIME));
-        resultEntity.setTP70((Long) totalHitArr[(int) (0.7 * totalHits)].getSource().get(EsConstants.DOC_FIELD_CONSUME_TIME));
-        resultEntity.setTP60((Long) totalHitArr[(int) (0.6 * totalHits)].getSource().get(EsConstants.DOC_FIELD_CONSUME_TIME));
-        resultEntity.setTP50((Long) totalHitArr[(int) (0.5 * totalHits)].getSource().get(EsConstants.DOC_FIELD_CONSUME_TIME));
+        resultEntity.setTP99(Long.valueOf(totalHitArr[(int) (0.99 * totalHits)].getSource().get(EsConstants.DOC_FIELD_CONSUME_TIME).toString()));
+        resultEntity.setTP90(Long.valueOf(totalHitArr[(int) (0.9 * totalHits)].getSource().get(EsConstants.DOC_FIELD_CONSUME_TIME).toString()));
+        resultEntity.setTP80(Long.valueOf(totalHitArr[(int) (0.8 * totalHits)].getSource().get(EsConstants.DOC_FIELD_CONSUME_TIME).toString()));
+        resultEntity.setTP70(Long.valueOf(totalHitArr[(int) (0.7 * totalHits)].getSource().get(EsConstants.DOC_FIELD_CONSUME_TIME).toString()));
+        resultEntity.setTP60(Long.valueOf(totalHitArr[(int) (0.6 * totalHits)].getSource().get(EsConstants.DOC_FIELD_CONSUME_TIME).toString()));
+        resultEntity.setTP50(Long.valueOf(totalHitArr[(int) (0.5 * totalHits)].getSource().get(EsConstants.DOC_FIELD_CONSUME_TIME).toString()));
         resultEntity.setSuccessRate(1 -  Double.valueOf(doubleFormat.format(errorHits/totalHits)));
         resultEntity.setErrDetail(Arrays.asList(errorSearchResponse.getHits().getHits()));
         return resultEntity;

@@ -71,7 +71,7 @@ public class ESClient {
         BoolQueryBuilder queryBuilder = QueryBuilders.boolQuery()
                 .must(QueryBuilders.existsQuery(EsConstants.DOC_FIELD_CONSUME_TIME))
                 .must(QueryBuilders.rangeQuery(EsConstants.DOC_FIELD_START_TIME).gte(start).lte(end));
-        return client.prepareSearch(indexName).setTypes(type).setPostFilter(queryBuilder).addSort(fieldSortBuilder).get();
+        return client.prepareSearch(indexName).setTypes(type).setPostFilter(queryBuilder).addSort(fieldSortBuilder).setSize(1000).get();
     }
 
     public SearchResponse queryErrorMethodDetail(String indexName, String type, Long start, Long end) {
@@ -80,7 +80,7 @@ public class ESClient {
                 .must(QueryBuilders.existsQuery(EsConstants.DOC_FIELD_CONSUME_TIME))
                 .must(QueryBuilders.rangeQuery(EsConstants.DOC_FIELD_START_TIME).gte(start).lte(end))
                 .must(QueryBuilders.termQuery(EsConstants.DOC_FIELD_ERROR_CODE,CommonConstants.ERROR_CODE_FAIL));
-        return client.prepareSearch(indexName).setTypes(type).setPostFilter(queryBuilder).addSort(fieldSortBuilder).get();
+        return client.prepareSearch(indexName).setTypes(type).setPostFilter(queryBuilder).addSort(fieldSortBuilder).setSize(1000).get();
     }
 /**********************************      初始化/关闭     ************************************************************************/
     /**

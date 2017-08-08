@@ -9,8 +9,8 @@ subprojects{
     compileJava.options.encoding = 'UTF-8'
 
     repositories {
-        maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
-        maven { url 'http://maven.oschina.net/content/groups/public/' }
+        maven { url 'http://central.maven.org/maven2/' }
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
         mavenCentral()
     }
 

@@ -3,5 +3,6 @@ dependencies {
     compile group: 'org.elasticsearch.client', name: 'transport', version: '5.2.2'
     compile group: 'joda-time', name: 'joda-time', version: '2.9.9'
     compile group: 'org.elasticsearch', name: 'elasticsearch', version: '5.2.2'
+
     compile project(':azzinoth-common')
 }

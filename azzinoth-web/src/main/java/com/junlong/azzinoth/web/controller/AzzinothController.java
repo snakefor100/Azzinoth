@@ -1,19 +1,17 @@
 package com.junlong.azzinoth.web.controller;
 
-import com.junlong.azzinoth.barrier.annotation.AProfiler;
 import com.junlong.azzinoth.common.domain.MethodResultEntity;
-import com.junlong.azzinoth.common.enums.ACustomFunctionEnum;
-import com.junlong.azzinoth.common.enums.AProEnum;
 import com.junlong.azzinoth.common.service.AzzinothQueryService;
 import com.junlong.azzinoth.service.TestService;
+
 import org.elasticsearch.search.SearchHit;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Random;
 
 import javax.annotation.Resource;
-import java.util.Random;
 
 
 /**
