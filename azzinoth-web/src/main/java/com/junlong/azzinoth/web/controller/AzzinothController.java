@@ -40,11 +40,11 @@ public class AzzinothController {
     @RequestMapping("/testAnnotation")
     @ResponseBody
     public String testAnnotation(){
-        int consume = new Random().nextInt(1500);
+
         try {
             testService.add();
-            Thread.sleep(consume);
-        } catch (InterruptedException e) {
+
+        } catch (Exception e) {
             e.printStackTrace();
             return "FAILUS";
         }

@@ -15,7 +15,13 @@ public class TestServiceImpl implements TestService {
     @Override
     @AProfiler(appName = "azzinoth",methodName = "testAnnotation",maxTime = 1000,mstate = {AProEnum.TIMEOUT,AProEnum.LOG},function = {ACustomFunctionEnum.TP,ACustomFunctionEnum.FUNCTIONERROR})
     public void add() {
+        try{
+            int consume = new Random().nextInt(1500);
+            System.out.println("AAA");
+            Thread.sleep(consume);
+        }catch (Exception e){
 
-        System.out.println("AAA");
+        }
+
     }
 }
