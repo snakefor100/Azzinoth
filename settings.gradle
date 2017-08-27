@@ -3,4 +3,6 @@ include 'azzinoth-barrier'
 include 'azzinoth-common'
 include 'azzinoth-service-es'
 include 'azzinoth-web'
+include 'azzinoth-core'
+include 'azzinoth-agent'
 
