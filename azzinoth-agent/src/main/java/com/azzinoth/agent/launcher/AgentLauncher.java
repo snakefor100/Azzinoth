@@ -36,6 +36,17 @@ public class AgentLauncher {
     }
 
 
+    private static ClassLoader loadOrDefineClassLoader(String agentJar) throws Exception{
+        final ClassLoader classLoader;
+        //如果azzinothClassLoader有值，说明之前启动过，返回azzinothClassLoader
+        if(null != azzinothClassLoader){
+            return azzinothClassLoader;
+        }
+        classLoader = new AgentClassLoader(agentJar);
+        classLoader.loadClass()
+        Mage.initForAgentLauncher(classLoader,advice);
+    }
+
     private static synchronized void startAgent(final String args, final Instrumentation inst){
         try {
             //args分为两个部分，以冒号分割：agentJar的路径，以及传递到服务器的参数
