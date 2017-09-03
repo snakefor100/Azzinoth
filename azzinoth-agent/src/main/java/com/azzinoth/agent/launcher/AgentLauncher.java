@@ -1,12 +1,8 @@
 package com.azzinoth.agent.launcher;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.instrument.Instrumentation;
-import java.util.Random;
+import java.util.jar.JarFile;
 
 /**
  * java agent启动类
@@ -22,35 +18,27 @@ public class AgentLauncher {
 
     /**
      * 随着监听程序一起启动的agent
-     * @param args
-     * @param inst
      */
-    public static void premain(String args, Instrumentation inst){
+    public static void premain(String args, Instrumentation inst) {
+        System.out.println("test");
         System.out.println(args);
         System.out.println(inst);
     }
 
     /**
      * agent延后启动
-     * @param args
-     * @param inst
      */
     public static void agentmain(String args, Instrumentation inst) {
+        final String agentJarUrl = "/Users/didi/workspace/Azzinoth/azzinoth-agent/build/libs/azzinoth-agent.jar";
         try {
-            ObjectMapper objectMapper = new ObjectMapper();
-            int i = new Random().nextInt(10);
-            File f = new File("F:\\\\test\\"+i+".txt");
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(f));
-            bufferedWriter.write(objectMapper.writeValueAsString(args));
-            bufferedWriter.newLine();
-            bufferedWriter.flush();
-            bufferedWriter.write(objectMapper.writeValueAsString(inst));
-            bufferedWriter.newLine();
-            bufferedWriter.flush();
-            System.out.println(args);
-            System.out.println(inst);
-        }catch (Exception e){
-            e.printStackTrace();
+            AgentClassLoader agentClassLoader = new AgentClassLoader(agentJarUrl);
+            System.out.println(222);
+            Class<?> aClass = agentClassLoader.loadClass("com.azzinoth.server.impl.H2MethodService");
+            Object o = aClass.newInstance();
+            Object test = aClass.getMethod("test").invoke(o);
+            inst.appendToBootstrapClassLoaderSearch(new JarFile(AgentLauncher.class.getProtectionDomain().getCodeSource().getLocation().getFile()));
+        } catch (Exception e) {
+            System.out.println(1111);
         }
 
     }

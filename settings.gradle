@@ -5,4 +5,5 @@ include 'azzinoth-service-es'
 include 'azzinoth-web'
 include 'azzinoth-core'
 include 'azzinoth-agent'
+include 'azzinoth-server'
 
